@@ -7,5 +7,5 @@ try:
 except Exception:
     pass
 
-# logging.config.fileConfig(log_path)
+logging.config.fileConfig(log_path)
 # _logger = logging.getLogger(__name__)
