@@ -23,7 +23,7 @@ pipeline {
                     steps {
     //                     sh "pip install virtualenv"
     //                     sh "virtualenv py3env -p python3 && source ~/py3env/bin/activate && cd testautomationcode && pip install requirements.txt && deactivate"
-                        sh "cd testautomationcode && pip install requirements.txt"
+                        sh "cd testautomationcode && pip install -r requirements.txt"
                     }
                 }
 
@@ -40,7 +40,8 @@ pipeline {
   post {
             always {
                 script {
-                    allure includeProperties: false, jdk: '', results: [[path: "target/artifacts/allure/"]]
+                    sh "post action"
+//                     allure includeProperties: false, jdk: '', results: [[path: "target/artifacts/allure/"]]
                 }
            }
   }
