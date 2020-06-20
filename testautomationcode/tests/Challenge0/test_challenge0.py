@@ -1,6 +1,6 @@
 import pytest
 from testautomationcode.actions.app1 import App1
-from time import time
+import time
 import json
 import logging
 import os
@@ -47,6 +47,7 @@ class TestChallenge0(object):
             "adress": "Guavus1"
         }
         assert app1_utils.add_user(user_details)
+        time.sleep(5) # added user not reflected in the page.
         assert app1_utils.check_user_at_ui(driver), "User not Found with details %s " % (
             str(app1_utils.last_added_user))
         assert app1_utils.delete_last_user().ok
