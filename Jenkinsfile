@@ -7,14 +7,31 @@ agent {label 'mac'}
         FILESERVER_PASSWORD = 'Gu@vu\\$12#'
         FILESERVER_DESTINATION = '/var/www/html/guavus/automation/validation'
   }
-  stages {
-
-        stage("Challenge0") {
-
-            steps {
-                sh "source ~/py3env/bin/activate && cd testautomationcode && python -m pytest tests/ && deactivate"
+  stage("Build Test Docker"){
+            agent {
+                docker { image 'python:3-alpine'
+                         args '-e HOME=$WORKSPACE'
+                         reuseNode true
+                }
             }
-        }
+
+      stages {
+            stage("virtual environment") {
+
+                steps {
+//                     sh "pip install virtualenv"
+//                     sh "virtualenv py3env -p python3 && source ~/py3env/bin/activate && cd testautomationcode && pip install requirements.txt && deactivate"
+                    sh "cd testautomationcode && pip install requirements.txt"
+                }
+            }
+
+            stage("Challenge0") {
+
+                steps {
+                    sh "cd testautomationcode && python -m pytest tests/"
+                }
+            }
+      }
   }
 
   post {
