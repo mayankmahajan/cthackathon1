@@ -42,7 +42,7 @@ class TestChallenge0(object):
         driver.maximize_window()
 
         user_details = {
-            "name": "Mayank100",
+            "name": "Mayank1001",
             "surname": "Mahajan1",
             "adress": "Guavus1"
         }
