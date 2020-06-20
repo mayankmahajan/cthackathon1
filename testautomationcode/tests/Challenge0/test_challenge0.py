@@ -41,12 +41,8 @@ class TestChallenge0(object):
         driver.get(os.environ['CHALLENGE0URL'])
         driver.maximize_window()
 
-        self.app_ui = APPUI(driver)
-
-        self._logger = logging.getLogger(__name__)
-
         user_details = {
-            "name": "Mayank1",
+            "name": "Mayank100",
             "surname": "Mahajan1",
             "adress": "Guavus1"
         }
