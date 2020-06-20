@@ -1,5 +1,5 @@
 import pytest
-from testautomationcode.actions.app1 import App1, APPUI
+from testautomationcode.actions.app1 import App1
 from time import time
 import json
 import logging
