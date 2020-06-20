@@ -1,4 +1,5 @@
 pipeline {
+agent {label 'any'}
   environment {
         ARTIFACTS_PATH = 'target/artifacts/'
         PYPI_SERVER = 'http://192.168.192.201:5050/'
