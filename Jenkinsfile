@@ -15,8 +15,6 @@ agent {label 'mac'}
 
             steps {
                 echo "Run Commmand to push docker image in artifactory"
-                // sh 'docker push artifacts.ggn.in.guavus.com:4244/${NIMBLE}:${dockerTag}'
-                docker_push( env.buildType, env.NIMBLE )
             }
         }
   }
