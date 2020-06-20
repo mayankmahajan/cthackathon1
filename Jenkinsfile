@@ -10,11 +10,17 @@ agent {label 'mac'}
   stages {
 
 
-
-        stage("Push docker images in artifactory") {
+        stage("virtual environment") {
 
             steps {
-                echo "Run Commmand to push docker image in artifactory"
+                sh ""
+            }
+        }
+
+        stage("Challenge0") {
+
+            steps {
+                sh "source ~/py3env/bin/activate && cd testautomationcode && python -m pytest tests/ && deactivate"
             }
         }
   }
