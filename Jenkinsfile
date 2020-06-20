@@ -2,6 +2,7 @@ pipeline {
     agent {label 'mac'}
       environment {
             BASEURL = 'http://35.188.114.237:8088/'
+            CHALLENGE0URL = 'https://cpsatexam.org/index.php/challenge-0/'
       }
   stages {
 
@@ -26,7 +27,7 @@ pipeline {
                 stage("Challenge0") {
 
                     steps {
-                        sh "cd testautomationcode && python -m pytest tests/"
+                        sh "cd testautomationcode && python -m pytest tests/ --driver Remote --host 192.168.103.6 --port 4444 --capability browserName chrome"
                     }
                 }
       }

@@ -58,3 +58,13 @@ class App1(object):
         url = self.get_url(endpoint="%s/deleteuser" % (self.last_added_user['id']))
         api_req_spec = ApiRequestSpecification(RequestType.DELETE, url=url)
         return self.api_request.execute_request(api_req_spec)
+
+    def check_user_at_ui(self, driver):
+        trs = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
+        for i in range(len(trs)):
+            if str(self.last_added_user['id']).lower() == str(trs[i].text).lower() and str(
+                    self.last_added_user['id']).lower() == str(trs[i + 1].text).lower():
+                return True
+                # assert True, "User Found with details %s " % (str(self.last_added_user))
+
+        return False
