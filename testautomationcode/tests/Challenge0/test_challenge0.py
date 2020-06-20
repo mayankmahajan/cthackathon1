@@ -47,6 +47,6 @@ class TestChallenge0(object):
             "adress": "Guavus1"
         }
         app1_utils.add_user(user_details)
-        assert self.app_ui.check_user_at_ui(driver)
+        assert app1_utils.check_user_at_ui(driver)
         assert app1_utils.delete_last_user().ok
-        assert not self.app_ui.check_user_at_ui(driver)
+        assert not app1_utils.check_user_at_ui(driver)
