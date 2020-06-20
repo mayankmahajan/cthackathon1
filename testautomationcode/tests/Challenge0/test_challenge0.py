@@ -46,7 +46,9 @@ class TestChallenge0(object):
             "surname": "Mahajan1",
             "adress": "Guavus1"
         }
-        app1_utils.add_user(user_details)
-        assert app1_utils.check_user_at_ui(driver)
+        assert app1_utils.add_user(user_details)
+        assert app1_utils.check_user_at_ui(driver), "User not Found with details %s " % (
+            str(app1_utils.last_added_user))
         assert app1_utils.delete_last_user().ok
-        assert not app1_utils.check_user_at_ui(driver)
+        assert not app1_utils.check_user_at_ui(driver), "User Found with details %s " % (
+            str(app1_utils.last_added_user))

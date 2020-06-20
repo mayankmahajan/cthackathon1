@@ -61,10 +61,19 @@ class App1(object):
 
     def check_user_at_ui(self, driver):
         trs = driver.find_element_by_tag_name("table").find_elements_by_tag_name("tr")
-        for i in range(len(trs)):
-            if str(self.last_added_user['id']).lower() == str(trs[i].text).lower() and str(
-                    self.last_added_user['id']).lower() == str(trs[i + 1].text).lower():
+        for i in range(len(trs), 0):
+            element = trs[i]
+            self.scroll_into_view(element)
+            string_to_search = str(self.last_added_user['id']).lower() + " " + str(self.last_added_user['name']).lower()
+            if string_to_search in str(trs[i].text).lower():
                 return True
-                # assert True, "User Found with details %s " % (str(self.last_added_user))
+
 
         return False
+
+    def scroll_into_view(self, element, align_to_top=True):
+        self._logger.info("Scrolling vertically to element with text: %s" % element.text)
+        if align_to_top is True:
+            self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        else:
+            self.driver.execute_script("arguments[0].scrollIntoView(false);", element)
