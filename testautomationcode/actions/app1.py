@@ -12,10 +12,10 @@ class App1(object):
         self.base_url = os.environ["BASEURL"]
         self.version = "api/v2"
         self._logger = logging.getLogger(__name__)
+        self.last_added_user = None
 
     def get_all_users(self):
-        endpoint = "users"
-        url = "%s/%s/%s" % (self.base_url, self.version, endpoint)
+        url = self.get_url(endpoint="users")
         api_request_specification = ApiRequestSpecification(RequestType.GET, url)
         resp = self.api_request.execute_request(api_request_specification)
         assert resp.ok
@@ -30,3 +30,31 @@ class App1(object):
         ids = self.get_users_param("id")
         self._logger.info(str(ids))
         return ids
+
+    def get_url(self, endpoint):
+        return "%s/%s/%s" % (self.base_url, self.version, endpoint)
+
+    def add_user(self, user_details):
+        url = self.get_url(endpoint="addusers")
+        api_req_spec = ApiRequestSpecification(RequestType.POST, url=url, json=user_details)
+        resp = self.api_request.execute_request(api_req_spec)
+        assert resp.ok
+        self.last_added_user = resp.json()
+        self._logger.info(
+            "User added: %s with id %s." % (str(self.last_added_user['name']), str(self.last_added_user['id'])))
+        return resp.json()
+
+    def update_user(self, user_details):
+        url = self.get_url(endpoint="updateuser")
+        api_req_spec = ApiRequestSpecification(RequestType.PUT, url=url, json=user_details)
+        return self.api_request.execute_request(api_req_spec)
+
+    def update_user(self, user_details):
+        url = self.get_url(endpoint="updateuser")
+        api_req_spec = ApiRequestSpecification(RequestType.PUT, url=url, json=user_details)
+        return self.api_request.execute_request(api_req_spec)
+
+    def delete_last_user(self):
+        url = self.get_url(endpoint="%s/deleteuser" % (self.last_added_user['id']))
+        api_req_spec = ApiRequestSpecification(RequestType.DELETE, url=url)
+        return self.api_request.execute_request(api_req_spec)

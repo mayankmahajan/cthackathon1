@@ -28,7 +28,7 @@ agent {label 'mac'}
   post {
         always {
             script {
-                sh "echo Hi."
+                allure includeProperties: false, jdk: '', results: [[path: "target/artifacts/allure/"]]
             }
        }
   }
