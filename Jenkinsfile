@@ -9,14 +9,6 @@ agent {label 'mac'}
   }
   stages {
 
-
-        stage("virtual environment") {
-
-            steps {
-                sh ""
-            }
-        }
-
         stage("Challenge0") {
 
             steps {
